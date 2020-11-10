@@ -7,8 +7,9 @@ const menuSchema = new Schema({
         type    : String,
         required: true
     },
-    item_type: { // starter, main course, dessert
+    item_type: { 
         type    : String,
+        enum: ['starter', 'main course','dessert'],
         required: true
     },
     price: { 
@@ -27,8 +28,9 @@ const menuSchema = new Schema({
 // restaurant schema
 const restaurantSchema = new Schema({
     name: {
-        type    : String,
-        required: true
+        type     : String,
+        required : true,
+        unique   : true
     },
     address: {
         type    : String,
@@ -44,7 +46,10 @@ const restaurantSchema = new Schema({
         max     : 5,
         required: true
     },
-    menuItems: [menuSchema]
+    menuItems: {
+        type: [menuSchema],
+        required: true
+    }
 }, {
     timestamps: true // this will automatically  add 2 timestamp createdAt and UpatedAT
 });
